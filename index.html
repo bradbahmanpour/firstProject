@@ -1,4 +1,4 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 
 <html lang="en">
 
@@ -9,7 +9,7 @@
   <title>Find Your Dream Job!</title>
   <!-- Added link to the jQuery Library -->
   <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
-
+  <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"> </script>
   <!-- Added a link to Bootstrap-->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
     crossorigin="anonymous">
@@ -50,10 +50,10 @@
               <div class="form-group">
                 <label for="num-records">Number of Records to Retrieve:</label>
                 <select class="form-control" id="num-records">
-							    <option value="1">1</option>
-							    <option value="5" selected>5</option>
-							    <option value="10">10</option>
-							  </select>
+                  <option value="1">1</option>
+                  <option value="5" selected>5</option>
+                  <option value="10">10</option>
+                </select>
               </div>
 
               <button type="submit" class="btn btn-default" id="search-btn">Search</button>
