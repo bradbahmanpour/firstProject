@@ -1,4 +1,4 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 
 <html lang="en">
 
@@ -13,7 +13,8 @@
   <!-- Added a link to Bootstrap-->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
     crossorigin="anonymous">
-  <!-- Our own CSS stylesheet -->
+
+    <!-- Our own CSS stylesheet -->
   <link rel="stylesheet" href="assets/css/style.css" media="screen">
 </head>
 
@@ -38,13 +39,18 @@
             <form role="form">
 
               <div class="form-group">
-                <label for="search">Job Title:</label>
+                <label for="jobTitle">Job Title:</label>
                 <input type="text" class="form-control" id="jobTitle">
               </div>
 
               <div class="form-group">
-                <label for="search">Location:</label>
-                <input type="text" class="form-control" id="location">
+                <label for="jobType">Job Type:</label>
+                <input type="text" class="form-control" id="jobType">
+              </div>
+
+              <div class="form-group">
+                <label for="jobLocation">Location:</label>
+                <input type="text" class="form-control" id="jobLocation">
               </div>
 
               <div class="form-group">
@@ -80,10 +86,9 @@
     </div>
 
   </div>
-
+ 
   <!-- Logic.js -->
-  <script src="assets/javascript/logic.js" type="text/javascript"></script>
-
+ <script src="assets/javascript/jobLogics.js" type="text/javascript"></script> 
 
 
 </body>
