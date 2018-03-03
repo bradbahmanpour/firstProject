@@ -69,32 +69,32 @@ function runQuery(numResults, queryURL) {
             // Check if things exist
             if (JobData[i].title !== "null") {
                 console.log(" Job Title : " + JobData[i].title);
-                $("#article-well-" + i).append("<h2>" + JobData[i].title + "</h2>");
+                $("#article-well-" + i).append("<h2>Job Title: " + JobData[i].title + "</h2>");
             }
 
             // Check if things exist
             if (JobData[i].type !== "null") {
                 console.log(" Job Type: " + JobData[i].type);
-                $("#article-well-" + i).append("<h3>" + JobData[i].type + "</h3>");
+                $("#article-well-" + i).append("<h3>Job Type: " + JobData[i].type + "</h3>");
             }
 
             // Check if things exist
             if (JobData[i].reated_at !== "null") {
                 console.log(" Job created Date : " + JobData[i].created_at);
-                $("#article-well-" + i).append("<h3>" + JobData[i].created_at + "</h3>");
+                $("#article-well-" + i).append("<h3>Published Date: " + JobData[i].created_at + "</h3>");
             }
 
              // Check if things exist
              if (JobData[i].company !== "null") {
                 console.log(" Company Name: " + JobData[i].company);
-                $("#article-well-" + i).append("<h3>" + JobData[i].company + "</h3>");
+                $("#article-well-" + i).append("<h3>Company Name: " + JobData[i].company + "</h3>");
             }
 
              // Check if things exist
              if (JobData[i].company_url !== "null") {
-                console.log(" Company's Website: " + JobData[i].company_url);
-                $("#article-well-" + i).append("<a href=" + JobData[i].company_url + ">" +
-                JobData[i].company_url + "</a>");
+                console.log(" Company Website: " + JobData[i].company_url);
+                $("#article-well-" + i).append("<h3>Company's Website:  " + "<a href=" + JobData[i].company_url + ">" +
+                JobData[i].company_url + "</a>" + "</h3>");
             }
 
             // Check if things exist
@@ -104,7 +104,9 @@ function runQuery(numResults, queryURL) {
             }
 
             // Check if things exist
+
             if (JobData[i].description!== "null") {
+                $("#article-well-" + i).append("<h3> Job Description: "+ "</h3>");
                 console.log(" Job Description: " + JobData[i].description);
                 $("#article-well-" + i).append("<h4>" + JobData[i].description + "</h4>");
             }
