@@ -1,6 +1,5 @@
 #header {
     border-radius: 25px;
-    width: 1060px;
     height: 200px;
     text-align: center;
 }
@@ -9,6 +8,7 @@
     margin-left: 0;
     margin-right: 0;
     padding-bottom: 10px;
+    border-radius: 15px;
 }
 
 h1 {
@@ -21,4 +21,18 @@ body {
 #mapscreen {
     float: right;
 }
+#sub-row1 {
 
+    margin-left: 0.25rem;
+}
+
+#sub-row2 {
+    margin-right: 0.25rem;
+}
+
+.z-depth-3 {
+    border-radius: 15px;
+}
+#sub-row3 {
+    margin-right: 0.25rem;
+}
