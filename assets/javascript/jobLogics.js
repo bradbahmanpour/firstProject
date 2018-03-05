@@ -5,10 +5,12 @@
 var jobTitle = "";
 var jobLocation = "";
 var jobType = "";
+var yourJobType = "";
 
 var numResults = 0;
 var startYear = 0;
 var endYear = 0;
+
 
 // URL Base
 var queryURLBase = "https://jobs.github.com/positions.json?";
@@ -25,7 +27,7 @@ function runQuery(numResults, queryURL) {
         url: queryURL,
         method: "GET",
         dataType: 'jsonp',
-        global : true
+        global: true
     }).then(function (JobData) {
 
         // Logging to Console
@@ -36,84 +38,82 @@ function runQuery(numResults, queryURL) {
         console.log(JobData);
         console.log("JobData.length=" + JobData.length);
 
-        
+
 
 
         // Clear the wells from the previous run
         $("#well-section").empty();
 
-     /*  if (JobData.length == 0) {
-            console.log(" There is no Job with those condition available at this time");
-        } */
+        /*  if (JobData.length == 0) {
+               console.log(" There is no Job with those condition available at this time");
+           } */
 
         // replace numArcticle with number of jobs founded if the number of jobs are less than the display number
-        if(JobData.length < numResults) {
+        if (JobData.length < numResults) {
             numResults = JobData.length;
         }
-      
+
         for (var i = 0; i < numResults; i++) {
-
-       
-        
-        
-        
-        
-       
-
-             // Start Dumping to HTML Here
+            // Start Dumping to HTML Here
             var wellSection = $("<div>");
             wellSection.addClass("well");
             wellSection.attr("id", "article-well-" + i);
             $("#well-section").append(wellSection);
 
             // Check if things exist
-            if (JobData[i].title !== "null") {
+            if (JobData[i].title != null) {
                 console.log(" Job Title : " + JobData[i].title);
                 $("#article-well-" + i).append("<h2>Job Title: " + JobData[i].title + "</h2>");
             }
 
             // Check if things exist
-            if (JobData[i].type !== "null") {
+            console.log(" Job Type: " + JobData[i].type);
+            if (JobData[i].type != "") {
                 console.log(" Job Type: " + JobData[i].type);
                 $("#article-well-" + i).append("<h3>Job Type: " + JobData[i].type + "</h3>");
             }
 
             // Check if things exist
-            if (JobData[i].reated_at !== "null") {
+            if (JobData[i].reated_at != null) {
                 console.log(" Job created Date : " + JobData[i].created_at);
                 $("#article-well-" + i).append("<h3>Published Date: " + JobData[i].created_at + "</h3>");
             }
 
-             // Check if things exist
-             if (JobData[i].company !== "null") {
+            // Check if things exist
+            if (JobData[i].company != null) {
                 console.log(" Company Name: " + JobData[i].company);
                 $("#article-well-" + i).append("<h3>Company Name: " + JobData[i].company + "</h3>");
             }
 
-             // Check if things exist
-             if (JobData[i].company_url !== "null") {
+            if (JobData[i].company != null) {
+                console.log(" Company Address: " + JobData[i].location);
+                $("#article-well-" + i).append("<h3>Job Location: " + JobData[i].location + "</h3>");
+            }
+
+            // Check if things exist
+            if (JobData[i].company_url != null) {
                 console.log(" Company Website: " + JobData[i].company_url);
-                $("#article-well-" + i).append("<h3>Company's Website:  " + "<a href=" + JobData[i].company_url + ">" +
-                JobData[i].company_url + "</a>" + "</h3>");
+                $("#article-well-" + i).append("<h3>Company Website:  " + "<a href=" + JobData[i].company_url + ">" +
+                    JobData[i].company_url + "</a>" + "</h3>");
             }
 
             // Check if things exist
-            if (JobData[i].how_to_apply !== "null") {
+            if (JobData[i].how_to_apply != null) {
                 console.log(" Apply for the Job: " + JobData[i].how_to_apply);
-                $("#article-well-" + i).append("<h3>" + JobData[i].how_to_apply+ "</h3>");
+                $("#article-well-" + i).append("<h3>" + JobData[i].how_to_apply + "</h3>");
             }
 
             // Check if things exist
 
-            if (JobData[i].description!== "null") {
-                $("#article-well-" + i).append("<h3> Job Description: "+ "</h3>");
+            if (JobData[i].description != null) {
+                $("#article-well-" + i).append("<h3> Job Description: " + "</h3>");
                 console.log(" Job Description: " + JobData[i].description);
                 $("#article-well-" + i).append("<h4>" + JobData[i].description + "</h4>");
             }
 
-           
 
-        } 
+
+        }
     });
 
 }
@@ -139,7 +139,18 @@ $("#search-btn").on("click", function (event) {
     console.log("queryTerm =  " + queryTerm);
 
     // Get Job Type value from the Form
-    queryTerm = queryTerm + "&type=" + $("#jobType").val().trim();
+
+    yourJobType = $("#jobType").val().trim().toLowerCase();
+    yourJobType = yourJobType.replace(/ +/g, ''); // removing space between the string
+
+    console.log("Job Type =  " + yourJobType);
+
+    if (yourJobType === "fulltime") {
+        queryTerm = queryTerm + "&full_time=true";
+    } else if (yourJobType === "parttime") {
+        queryTerm = queryTerm + "&full_time=false";
+    }
+
     console.log("Job Type =  " + queryTerm);
     // Get Job Type value
 
