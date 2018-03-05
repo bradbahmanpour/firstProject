@@ -171,7 +171,16 @@ $("#search-btn").on("click", function (event) {
 
 });
 
+$("#clear-btn").on("click", function (event) {
+    // This code will clear the input fields in the Search Form
+   
+    event.preventDefault();
 
+$("#jobTitle").val('');
+$("#jobType").val('');
+$("#jobLocation").val('');
+
+});
 // 1. Retrieve user inputs and convert to variables
 // 2. Use those variable to run an AJAX call to the New York Times.
 // 3. Break down the NYT Object into useable fields
