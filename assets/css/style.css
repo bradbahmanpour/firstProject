@@ -66,3 +66,6 @@ h3 {
 [type="checkbox"]+label {
     height: 16px;
 }
+label {
+    color: black;
+}
