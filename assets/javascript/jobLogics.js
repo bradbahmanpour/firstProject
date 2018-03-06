@@ -112,6 +112,7 @@ function runQuery(numResults, queryURL) {
                 console.log(" Apply for the Job: " + JobData[i].how_to_apply);
                 $("#article-well-" + i).append("<h5>" + JobData[i].how_to_apply + "</h5>");
             }
+            
 
             // Check if things exist
 
@@ -121,19 +122,13 @@ function runQuery(numResults, queryURL) {
                 $("#article-well-" + i).append("<h6>" + JobData[i].description + "</h6>");
             }
 
-
-
         }
     });
 
 }
 
-
-
-// https://jobs.github.com/positions.json?description=java&location=palo+alto
 // MAIN PROCESSES
 // =========================================
-
 
 
 $("#search-btn").on("click", function (event) {
@@ -150,9 +145,17 @@ $("#search-btn").on("click", function (event) {
 
     // Get Job Type value from the Form
 
-    yourJobType = $("#jobType").val().trim().toLowerCase();
-    yourJobType = yourJobType.replace(/ +/g, ''); // removing space between the string
+    if ($('#jobType').prop('checked')) {
+        // something when checked
+        yourJobType = "fulltime";
+    } else {
+        // something else when not
+        yourJobType = "parttime";
+    }
 
+    /*  yourJobType = $("#jobType").val().trim().toLowerCase();
+      yourJobType = yourJobType.replace(/ +/g, ''); // removing space between the string
+    */
     console.log("Job Type =  " + yourJobType);
 
     if (yourJobType === "fulltime") {
@@ -181,6 +184,22 @@ $("#search-btn").on("click", function (event) {
 
 });
 
+$("#clear-btn").on("click", function (event) {
+    // This code will clear the input fields in the Search Form
+
+    event.preventDefault();
+
+    $("#jobTitle").val('');
+    $("#jobType").val('');
+    $("#jobLocation").val('');
+
+});
+// 1. Retrieve user inputs and convert to variables
+// 2. Use those variable to run an AJAX call to the New York Times.
+// 3. Break down the NYT Object into useable fields
+// 4. Dynamically generate html content
+
+// 5. Dealing with "edge cases" -- bugs or situations that are not intuitive.
 $(document).on("click", ".pickedItem", function() {
 var picked = $(this).parent().attr("data-picked");
 var jobNotes = {title:$(this).parent().attr("data-title"), 
