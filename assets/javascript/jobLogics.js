@@ -103,12 +103,8 @@ function runQuery(numResults, queryURL) {
             // Check if things exist
             if (JobData[i].company_url != null) {
                 console.log(" Company Website: " + JobData[i].company_url);
-<<<<<<< HEAD
-                $("#article-well-" + i).append("<h3>Company Website:  " + "<a target='_blank' href=" + JobData[i].company_url + ">" + JobData[i].company_url + "</a>" + "</h3>");
-=======
                 $("#article-well-" + i).append("<h5>Company Website:  " + "<a href=" + JobData[i].company_url + ">" +
                     JobData[i].company_url + "</a>" + "</h5>");
->>>>>>> f4492fa472d910c4205bc76af8f900f8ef442d64
             }
 
             // Check if things exist
