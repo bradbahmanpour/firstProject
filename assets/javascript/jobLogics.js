@@ -11,6 +11,8 @@ var jobsPicked = [];
 var numResults = 0;
 var startYear = 0;
 var endYear = 0;
+var checkmark = true;
+
 
 
 // URL Base
@@ -68,6 +70,7 @@ function runQuery(numResults, queryURL) {
                 $("#article-well-" + i).append("<h4>" + " <span class='numberLabel'>" + articleCount + "</span> " + " Job Title: " 
                 +  JobData[i].title + "</h4>" + "<label for='myJobs'>Add to my Job List: </label>" + 
                 "<input type='checkbox' class='form-control pickedItem' id='pick" + [i] + "'><label for='pick" + [i] + "'></label>");
+                $("#article-well-" + i).attr("data-title", JobData[i].title);
             }
 
             // Check if things exist
@@ -87,11 +90,13 @@ function runQuery(numResults, queryURL) {
             if (JobData[i].company != null) {
                 console.log(" Company Name: " + JobData[i].company);
                 $("#article-well-" + i).append("<h5>Company Name: " + JobData[i].company + "</h5>");
+                $("#article-well-" + i).attr("data-company", JobData[i].company);
             }
 
             if (JobData[i].company != null) {
                 console.log(" Company Address: " + JobData[i].location);
                 $("#article-well-" + i).append("<h5>Job Location: " + JobData[i].location + "</h5>");
+                $("#article-well-" + i).attr("data-location", JobData[i].location);
             }
 
             // Check if things exist
@@ -176,13 +181,27 @@ $("#search-btn").on("click", function (event) {
 });
 
 $(document).on("click", ".pickedItem", function() {
-    jobsPicked.push($(this).attr("id"));
-    console.log(jobsPicked);
+
+    if(checkmark) {
+
+    var jobNotes = {title:$(this).parent().attr("data-title"), 
+    company:$(this).parent().attr("data-company"), location:$(this).parent().attr("data-location")};
+    jobsPicked.push(jobNotes);
+    console.log(jobNotes);
+    console.log($(this).parent().attr("data-title"));
+    console.log($(this).parent().attr("data-company"));
+    console.log($(this).parent().attr("data-location"));
+
+    sessionStorage.clear();
+   
+    sessionStorage.setItem("data-title", jobNotes.title);
+    sessionStorage.setItem("data-company", jobNotes.company);
+    sessionStorage.setItem("data-location", jobNotes.location);
+    checkmark = false;
+    }
+
+    else{
+        checkmark = true;
+    }
 
 });
-// 1. Retrieve user inputs and convert to variables
-// 2. Use those variable to run an AJAX call to the New York Times.
-// 3. Break down the NYT Object into useable fields
-// 4. Dynamically generate html content
-
-// 5. Dealing with "edge cases" -- bugs or situations that are not intuitive.
