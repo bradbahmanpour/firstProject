@@ -40,23 +40,31 @@
                 <label for="jobTitle">Job Title:</label>
                 <input type="text" class="form-control" id="jobTitle">
               </div>
-
+        <!--
               <div class="form-group">
                 <label for="jobType">Job Type:</label>
                 <input type="text" class="form-control" id="jobType">
               </div>
-
+            -->
+              
               <div class="form-group">
                 <label for="jobLocation">Location:</label>
                 <input type="text" class="form-control" id="jobLocation">
               </div>
 
               <div class="form-group">
+                    <input type="checkbox" id="jobType" name="fulltime" value="FullTime">
+                    <label for="jobType">Show me only Full Time Jobs</label>
+                  </div>
+
+              <div class="form-group">
                 <label for="num-records">Number of Records to Retrieve:</label>
                 <select class="form-control" id="num-records">
 							    <option value="1">1</option>
 							    <option value="5" selected>5</option>
-							    <option value="10">10</option>
+                                <option value="10">10</option>
+                                <option value="15">15</option>
+                                <option value="20">20</option>
 							  </select>
               </div>
 

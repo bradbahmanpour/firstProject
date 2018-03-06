@@ -93,8 +93,7 @@ function runQuery(numResults, queryURL) {
             // Check if things exist
             if (JobData[i].company_url != null) {
                 console.log(" Company Website: " + JobData[i].company_url);
-                $("#article-well-" + i).append("<h3>Company Website:  " + "<a href=" + JobData[i].company_url + ">" +
-                    JobData[i].company_url + "</a>" + "</h3>");
+                $("#article-well-" + i).append("<h3>Company Website:  " + "<a target='_blank' href=" + JobData[i].company_url + ">" + JobData[i].company_url + "</a>" + "</h3>");
             }
 
             // Check if things exist
@@ -102,6 +101,7 @@ function runQuery(numResults, queryURL) {
                 console.log(" Apply for the Job: " + JobData[i].how_to_apply);
                 $("#article-well-" + i).append("<h3>" + JobData[i].how_to_apply + "</h3>");
             }
+            
 
             // Check if things exist
 
@@ -111,19 +111,13 @@ function runQuery(numResults, queryURL) {
                 $("#article-well-" + i).append("<h4>" + JobData[i].description + "</h4>");
             }
 
-
-
         }
     });
 
 }
 
-
-
-// https://jobs.github.com/positions.json?description=java&location=palo+alto
 // MAIN PROCESSES
 // =========================================
-
 
 
 $("#search-btn").on("click", function (event) {
@@ -140,9 +134,17 @@ $("#search-btn").on("click", function (event) {
 
     // Get Job Type value from the Form
 
-    yourJobType = $("#jobType").val().trim().toLowerCase();
-    yourJobType = yourJobType.replace(/ +/g, ''); // removing space between the string
+    if ($('#jobType').prop('checked')) {
+        // something when checked
+        yourJobType = "fulltime";
+    } else {
+        // something else when not
+        yourJobType = "parttime";
+    }
 
+    /*  yourJobType = $("#jobType").val().trim().toLowerCase();
+      yourJobType = yourJobType.replace(/ +/g, ''); // removing space between the string
+    */
     console.log("Job Type =  " + yourJobType);
 
     if (yourJobType === "fulltime") {
@@ -173,12 +175,12 @@ $("#search-btn").on("click", function (event) {
 
 $("#clear-btn").on("click", function (event) {
     // This code will clear the input fields in the Search Form
-   
+
     event.preventDefault();
 
-$("#jobTitle").val('');
-$("#jobType").val('');
-$("#jobLocation").val('');
+    $("#jobTitle").val('');
+    $("#jobType").val('');
+    $("#jobLocation").val('');
 
 });
 // 1. Retrieve user inputs and convert to variables
