@@ -30,3 +30,7 @@ body {
 .job-results {
     font-size: 20px;
 }
+
+#map {
+height: 200px;
+}

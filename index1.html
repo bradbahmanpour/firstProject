@@ -7,120 +7,47 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
 
     <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+    
     <link rel="stylesheet" type="text/css" href="assets/css/css1.css">
+
 </head>
 
 <body>
 
         <div class ="container">
 
-        <div id="header" class="row" style="background-color: #20315A ; color: white;">
-            <h1 class="text-center">Super Job Search Engine</h1>
-        </div>
-             
-        <br>
 
-<div class ="row" id ="row2" style="background-color: white;">
+     <div class="map">
+         </div> 
      
-    <div class="col s4">
-          <div class="row" id="sub-row">
-          <div class="panel-heading">
-          <h3 class="panel-title">Search Parameters</h3>
-          </div>
-
-    <div class="panel-body">
-    <form role="form">
-    <div class="form-group">
-    <label for="search">Job Title:</label>
-    <input type="text" class="form-control" id="jobTitle">
-    </div>
-
-    <div class="form-group">
-    <label for="search">Location:</label>
-    <input type="text" class="form-control" id="location">
-    </div>
-
-    <div class="form-group">
-    <label for="num-records">Number of Records to Retrieve:</label>
-    <select class="browser-default" id="num-records">
-    <option value="" disabled selected>Choose your option</option>
-		<option value="1">1</option>
-		<option value="5" selected>5</option>
-		<option value="10">10</option>
-		</select>
-    </div>
-<br>
-    <button type="submit" class="btn btn-default" id="search-btn">Search</button>
-    <button type="button" class="btn btn-default">Clear</button>
-    </form>
-    </div>
-
-    <!-- Closing div for sub row -->
-    </div>
-    <div class="job-results">
-    Job Results
-    <ul>
-        <li>Job 1</li>
-        <li>Job 2</li>
-        <li>Job 3</li>
-    </ul>
-    </div>
-
-    <!-- Closing div for col s4 -->     
-    </div>
-
-<!-- /////////////////////////////////////////////////////////////////////////////////////////////// -->   
-
-
-    <div class = "col s5" id = "mapscreen">
-    <div class= "row" id = "subrow2">
-    <form role="form">
-        
-    <div class="form-group">
-    <label for="search">Job Title:</label>
-    <input type="text" class="form-control" id="jobTitle">
-     </div>
-        
      <div class="form-group">
-     <label for="search">Location:</label>
-     <input type="text" class="form-control" id="location">
-     </div>
-        
-     <div class="form-group">
-     <label for="num-records">Number of Records to Retrieve:</label>
-     <select class="browser-default" id="num-records">
-     <option value="" disabled selected>Choose your option</option>
-     <option value="1">1</option>
-     <option value="5" selected>5</option>
-     <option value="10">10</option>
-     </select>
-     </div>
-     <br>
-
-     <button type="submit" class="btn btn-default" id="search-btn">Search</button>
-     <button type="button" class="btn btn-default">Clear</button>
-        
-     </form>
-     <br>
-     </div>       
-     <div class="form-group">
-        <label for="Start">Starting location</label>
+        <label for="start">Start</label>
         <input type="text" class="form-control" id="startLocation">
          </div>
             
          <div class="form-group">
-         <label for="search">Ending location</label>
+         <label for="end">End</label>
          <input type="text" class="form-control" id="endingLocation">
+
+         <button type="submit" class="btn btn-default" id="search-btn">Search</button>
+
          </div>  
      </div>
 
      <!-- Closing div for row 2 -->   
      </div>
+
+     <div id = "map"></div>
      
      <!-- Closing div for container -->
      </div>
-
+     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+     <script src="assets/javascript/js1.js"></script>
+     <script async defer
+     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyALtpPTZkshw-X0kow3kC6Rw5iArysc1HE&callback=initMap">
+     </script> 
+     
 
 </body>
 
