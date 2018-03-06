@@ -9,6 +9,7 @@
     margin-right: 0;
     padding-bottom: 10px;
     border-radius: 15px;
+    padding-top: 5px;
 }
 
 h1 {
@@ -22,17 +23,46 @@ body {
     float: right;
 }
 #sub-row1 {
-
-    margin-left: 0.25rem;
+    margin-top: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
 }
 
 #sub-row2 {
-    margin-right: 0.25rem;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 .z-depth-3 {
     border-radius: 15px;
 }
-#sub-row3 {
-    margin-right: 0.25rem;
+h3 {
+    margin-top: 12px;
+}
+
+.panel-title2 {
+    margin-left: 25px;
+    margin-top: 20px;
+}
+#well-section {
+    margin-right: 30px;
+    margin-left: 30px;
+    margin-bottom: 10px;
+}
+.well {
+    padding:1px 25px 1px 20px;
+    background-color: lightgray;
+    margin-bottom: 15px;
+}
+.numberLabel {
+    color: white;
+    background-color: darkblue;
+    border-radius: 3px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+
+[type="checkbox"]+label {
+    height: 16px;
 }
