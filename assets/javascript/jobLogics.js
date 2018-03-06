@@ -6,10 +6,13 @@ var jobTitle = "";
 var jobLocation = "";
 var jobType = "";
 var yourJobType = "";
+var jobsPicked = [];
 
 var numResults = 0;
 var startYear = 0;
 var endYear = 0;
+var checkmark = true;
+
 
 
 // URL Base
@@ -55,6 +58,7 @@ function runQuery(numResults, queryURL) {
 
         for (var i = 0; i < numResults; i++) {
             // Start Dumping to HTML Here
+            var articleCount = i + 1;
             var wellSection = $("<div>");
             wellSection.addClass("well");
             wellSection.attr("id", "article-well-" + i);
@@ -63,52 +67,62 @@ function runQuery(numResults, queryURL) {
             // Check if things exist
             if (JobData[i].title != null) {
                 console.log(" Job Title : " + JobData[i].title);
-                $("#article-well-" + i).append("<h2>Job Title: " + JobData[i].title + "</h2>");
+                $("#article-well-" + i).append("<h4>" + " <span class='numberLabel'>" + articleCount + "</span> " + " Job Title: " 
+                +  JobData[i].title + "</h4>" + "<label for='myJobs'>Add to my Job List: </label>" + 
+                "<input type='checkbox' class='form-control pickedItem' id='pick" + [i] + "'><label for='pick" + [i] + "'></label>");
+                $("#article-well-" + i).attr("data-title", JobData[i].title);
             }
 
             // Check if things exist
             console.log(" Job Type: " + JobData[i].type);
             if (JobData[i].type != "") {
                 console.log(" Job Type: " + JobData[i].type);
-                $("#article-well-" + i).append("<h3>Job Type: " + JobData[i].type + "</h3>");
+                $("#article-well-" + i).append("<h5>Job Type: " + JobData[i].type + "</h5>");
             }
 
             // Check if things exist
             if (JobData[i].reated_at != null) {
                 console.log(" Job created Date : " + JobData[i].created_at);
-                $("#article-well-" + i).append("<h3>Published Date: " + JobData[i].created_at + "</h3>");
+                $("#article-well-" + i).append("<h5>Published Date: " + JobData[i].created_at + "</h5>");
             }
 
             // Check if things exist
             if (JobData[i].company != null) {
                 console.log(" Company Name: " + JobData[i].company);
-                $("#article-well-" + i).append("<h3>Company Name: " + JobData[i].company + "</h3>");
+                $("#article-well-" + i).append("<h5>Company Name: " + JobData[i].company + "</h5>");
+                $("#article-well-" + i).attr("data-company", JobData[i].company);
             }
 
             if (JobData[i].company != null) {
                 console.log(" Company Address: " + JobData[i].location);
-                $("#article-well-" + i).append("<h3>Job Location: " + JobData[i].location + "</h3>");
+                $("#article-well-" + i).append("<h5>Job Location: " + JobData[i].location + "</h5>");
+                $("#article-well-" + i).attr("data-location", JobData[i].location);
             }
 
             // Check if things exist
             if (JobData[i].company_url != null) {
                 console.log(" Company Website: " + JobData[i].company_url);
+<<<<<<< HEAD
                 $("#article-well-" + i).append("<h3>Company Website:  " + "<a target='_blank' href=" + JobData[i].company_url + ">" + JobData[i].company_url + "</a>" + "</h3>");
+=======
+                $("#article-well-" + i).append("<h5>Company Website:  " + "<a href=" + JobData[i].company_url + ">" +
+                    JobData[i].company_url + "</a>" + "</h5>");
+>>>>>>> f4492fa472d910c4205bc76af8f900f8ef442d64
             }
 
             // Check if things exist
             if (JobData[i].how_to_apply != null) {
                 console.log(" Apply for the Job: " + JobData[i].how_to_apply);
-                $("#article-well-" + i).append("<h3>" + JobData[i].how_to_apply + "</h3>");
+                $("#article-well-" + i).append("<h5>" + JobData[i].how_to_apply + "</h5>");
             }
             
 
             // Check if things exist
 
             if (JobData[i].description != null) {
-                $("#article-well-" + i).append("<h3> Job Description: " + "</h3>");
+                $("#article-well-" + i).append("<h5> Job Description: " + "</h5>");
                 console.log(" Job Description: " + JobData[i].description);
-                $("#article-well-" + i).append("<h4>" + JobData[i].description + "</h4>");
+                $("#article-well-" + i).append("<h6>" + JobData[i].description + "</h6>");
             }
 
         }
@@ -189,3 +203,28 @@ $("#clear-btn").on("click", function (event) {
 // 4. Dynamically generate html content
 
 // 5. Dealing with "edge cases" -- bugs or situations that are not intuitive.
+$(document).on("click", ".pickedItem", function() {
+
+    if(checkmark) {
+
+    var jobNotes = {title:$(this).parent().attr("data-title"), 
+    company:$(this).parent().attr("data-company"), location:$(this).parent().attr("data-location")};
+    jobsPicked.push(jobNotes);
+    console.log(jobNotes);
+    console.log($(this).parent().attr("data-title"));
+    console.log($(this).parent().attr("data-company"));
+    console.log($(this).parent().attr("data-location"));
+
+    sessionStorage.clear();
+   
+    sessionStorage.setItem("data-title", jobNotes.title);
+    sessionStorage.setItem("data-company", jobNotes.company);
+    sessionStorage.setItem("data-location", jobNotes.location);
+    checkmark = false;
+    }
+
+    else{
+        checkmark = true;
+    }
+
+});
