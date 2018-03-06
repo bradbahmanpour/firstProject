@@ -71,6 +71,7 @@ function runQuery(numResults, queryURL) {
                 +  JobData[i].title + "</h4>" + "<label for='myJobs'>Add to my Job List: </label>" + 
                 "<input type='checkbox' class='form-control pickedItem' id='pick" + [i] + "'><label for='pick" + [i] + "'></label>");
                 $("#article-well-" + i).attr("data-title", JobData[i].title);
+                $("#article-well-" + i).attr("data-picked", "false");
             }
 
             // Check if things exist
@@ -204,11 +205,12 @@ $("#clear-btn").on("click", function (event) {
 
 // 5. Dealing with "edge cases" -- bugs or situations that are not intuitive.
 $(document).on("click", ".pickedItem", function() {
+var picked = $(this).parent().attr("data-picked");
+var jobNotes = {title:$(this).parent().attr("data-title"), 
+company:$(this).parent().attr("data-company"), location:$(this).parent().attr("data-location")};   
 
-    if(checkmark) {
+if(picked === "false") {
 
-    var jobNotes = {title:$(this).parent().attr("data-title"), 
-    company:$(this).parent().attr("data-company"), location:$(this).parent().attr("data-location")};
     jobsPicked.push(jobNotes);
     console.log(jobNotes);
     console.log($(this).parent().attr("data-title"));
@@ -217,14 +219,22 @@ $(document).on("click", ".pickedItem", function() {
 
     sessionStorage.clear();
    
-    sessionStorage.setItem("data-title", jobNotes.title);
-    sessionStorage.setItem("data-company", jobNotes.company);
-    sessionStorage.setItem("data-location", jobNotes.location);
-    checkmark = false;
+    sessionStorage.setItem("data-title", JSON.stringify(jobsPicked));
+    $(this).parent().attr("data-picked", "true");
     }
 
     else{
-        checkmark = true;
+        $(this).parent().attr("data-picked", "false");
+        for (var i = 0; i < jobsPicked.length; i++) {
+                if (jobNotes.title === jobsPicked[i].title) {
+                    jobsPicked.splice(i)
+                    sessionStorage.setItem("data-title", JSON.stringify(jobsPicked));
+                }
+        }
+    
     }
+
+    console.log(sessionStorage);
+    
 
 });
