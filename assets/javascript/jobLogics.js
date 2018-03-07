@@ -305,11 +305,11 @@ $(document).on("click", "#print-btn", function () {
 
     for (var i = 0; i < jobsPicked.length; i++) {
 
-        console.log(jobsPicked[i].company);
         console.log(jobsPicked[i].title);
+        console.log(jobsPicked[i].company);
         console.log(jobsPicked[i].location);
 
-            $("#company-list").append("<tr><td>" + jobsPicked[i].title + "</td><td>"+ jobsPicked[i].company + "</td><td>" + jobsPicked[i].location + "</td></tr>" );
+            $("#company-list").append("<tr><td>" + jobsPicked[i].company + "</td><td>"+ jobsPicked[i].title+ "</td><td>" + jobsPicked[i].location + "</td></tr>" );
        
 
     }
