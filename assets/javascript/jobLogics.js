@@ -268,6 +268,11 @@ function findLatLong(address) {
             localStorage.setItem("latitude", latitude);
             localStorage.setItem("longitude", longitude);
 
+            // Save data to sessionStorage
+
+            sessionStorage.setItem("latitude", latitude);
+            sessionStorage.setItem("longitude", longitude);
+
         }
     });
 
@@ -288,6 +293,3 @@ $(document).on("click", "#map-btn", function () {
 
 
 });
-
-
-//line is here for merge

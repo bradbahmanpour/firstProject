@@ -13,17 +13,17 @@
 
         #map {
             height: 100%;
-          
+
         }
 
         /* Optional: Makes the sample page fill the window. */
 
-       html,
+        html,
         body {
             height: 100%;
             margin: 0;
             padding: 0;
-        } 
+        }
     </style>
 
 </head>
@@ -34,12 +34,27 @@
     <script>
         var map;
         function initMap() {
-// read the latitude and longtitude from the localStorgae memory
+            // read the latitude and longtitude from the localStorgae memory
+
+            if (localStorage.getItem("latitude") == null) {
+
+            }
+
+            console.log
+
+            // Get saved data from sessionStorage
+
+            //     latVal = parseInt(sessionStorage.getItem("latitude"));
+            //     lngVal = parseInt(sessionStorage.getItem("longitude"));
+
+            //   console.log("I am in draw Map sessionStorage data =" + latVal;
+
             latVal = parseInt(localStorage.getItem("latitude"));
             lngVal = parseInt(localStorage.getItem("longitude"));
 
-            console.log("latitude" + latVal);
-            console.log("longitude" + lngVal);
+
+            console.log("I am in draw Map latitude" + latVal);
+            console.log("I am in draw Maplongitude" + lngVal);
 
             map = new google.maps.Map(document.getElementById('map'), {
                 center: { lat: latVal, lng: lngVal },
