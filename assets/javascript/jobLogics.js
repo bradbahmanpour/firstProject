@@ -67,22 +67,33 @@ function runQuery(numResults, queryURL) {
             // Check if things exist
             if (JobData[i].title != null) {
                 console.log(" Job Title : " + JobData[i].title);
-                $("#article-well-" + i).append("<h4>" + " <span class='numberLabel'>" + articleCount + "</span> " + " Job Title: " 
-                +  JobData[i].title + "</h4>" + "<label for='myJobs'>Add to my Job List: </label>" + 
-                "<input type='checkbox' class='form-control pickedItem' id='pick" + [i] + "'><label for='pick" + [i] + "'></label>");
+                $("#article-well-" + i).append("<h4>" + " <span class='numberLabel'>" + articleCount + "</span> " + " Job Title: "
+                    + JobData[i].title + "</h4>" + "<label for='myJobs'><h6>Add to my Job List: </h6></label>" +
+                    "<input type='checkbox' class='form-control pickedItem' id='pick" + [i] + "'><label for='pick" + [i] + "'></label>");
                 $("#article-well-" + i).attr("data-title", JobData[i].title);
                 $("#article-well-" + i).attr("data-picked", "false");
             }
 
             // Check if things exist
-            console.log(" Job Type: " + JobData[i].type);
-            if (JobData[i].type != "") {
-                console.log(" Job Type: " + JobData[i].type);
-                $("#article-well-" + i).append("<h5>Job Type: " + JobData[i].type + "</h5>");
+
+
+
+            if ($('#jobType').prop('checked')) {
+                // something when checked
+                yourJobType = "fulltime";
+            } else {
+                // something else when not
+                yourJobType = "parttime";
             }
+            console.log("Job Type =  " + yourJobType);
+
+
+            console.log(" Job Type: " + JobData[i].type);
+            $("#article-well-" + i).append("<h5>Job Type: " + JobData[i].type + "</h5>");
+
 
             // Check if things exist
-            if (JobData[i].reated_at != null) {
+            if (JobData[i].created_at != null) {
                 console.log(" Job created Date : " + JobData[i].created_at);
                 $("#article-well-" + i).append("<h5>Published Date: " + JobData[i].created_at + "</h5>");
             }
@@ -98,12 +109,14 @@ function runQuery(numResults, queryURL) {
                 console.log(" Company Address: " + JobData[i].location);
                 $("#article-well-" + i).append("<h5>Job Location: " + JobData[i].location + "</h5>");
                 $("#article-well-" + i).attr("data-location", JobData[i].location);
+                // Add Map button
+                $("#article-well-" + i).append('<button type="button" class="btn btn-default" value="' + JobData[i].location + '"id="map-btn">Show on the Map</button>');
             }
 
             // Check if things exist
             if (JobData[i].company_url != null) {
                 console.log(" Company Website: " + JobData[i].company_url);
-                $("#article-well-" + i).append("<h5>Company Website:  " + "<a href=" + JobData[i].company_url + ">" +
+                $("#article-well-" + i).append("<h5>Company Website:  " + "<a target='_blank' href=" + JobData[i].company_url + ">" +
                     JobData[i].company_url + "</a>" + "</h5>");
             }
 
@@ -112,7 +125,7 @@ function runQuery(numResults, queryURL) {
                 console.log(" Apply for the Job: " + JobData[i].how_to_apply);
                 $("#article-well-" + i).append("<h5>" + JobData[i].how_to_apply + "</h5>");
             }
-            
+
 
             // Check if things exist
 
@@ -192,47 +205,89 @@ $("#clear-btn").on("click", function (event) {
     $("#jobTitle").val('');
     $("#jobType").val('');
     $("#jobLocation").val('');
+    $("#well-section").empty();
+    localStorage.clear();
 
 });
-// 1. Retrieve user inputs and convert to variables
-// 2. Use those variable to run an AJAX call to the New York Times.
-// 3. Break down the NYT Object into useable fields
-// 4. Dynamically generate html content
 
-// 5. Dealing with "edge cases" -- bugs or situations that are not intuitive.
-$(document).on("click", ".pickedItem", function() {
-var picked = $(this).parent().attr("data-picked");
-var jobNotes = {title:$(this).parent().attr("data-title"), 
-company:$(this).parent().attr("data-company"), location:$(this).parent().attr("data-location")};   
 
-if(picked === "false") {
+$(document).on("click", ".pickedItem", function () {
+    var picked = $(this).parent().attr("data-picked");
+    var jobNotes = {
+        title: $(this).parent().attr("data-title"),
+        company: $(this).parent().attr("data-company"), location: $(this).parent().attr("data-location")
+    };
 
-    jobsPicked.push(jobNotes);
-    console.log(jobNotes);
-    console.log($(this).parent().attr("data-title"));
-    console.log($(this).parent().attr("data-company"));
-    console.log($(this).parent().attr("data-location"));
+    if (picked === "false") {
 
-    sessionStorage.clear();
-   
-    sessionStorage.setItem("data-title", JSON.stringify(jobsPicked));
-    $(this).parent().attr("data-picked", "true");
+        jobsPicked.push(jobNotes);
+        console.log(jobNotes);
+        console.log($(this).parent().attr("data-title"));
+        console.log($(this).parent().attr("data-company"));
+        console.log($(this).parent().attr("data-location"));
+
+        sessionStorage.clear();
+
+        sessionStorage.setItem("data-title", JSON.stringify(jobsPicked));
+        $(this).parent().attr("data-picked", "true");
     }
 
-    else{
+    else {
         $(this).parent().attr("data-picked", "false");
         for (var i = 0; i < jobsPicked.length; i++) {
-                if (jobNotes.title === jobsPicked[i].title) {
-                    jobsPicked.splice(i)
-                    sessionStorage.setItem("data-title", JSON.stringify(jobsPicked));
-                }
+            if (jobNotes.title === jobsPicked[i].title) {
+                jobsPicked.splice(i)
+                sessionStorage.setItem("data-title", JSON.stringify(jobsPicked));
+            }
         }
-    
+
     }
 
     console.log(sessionStorage);
-    
+
 
 });
+
+
+function findLatLong(address) {
+
+    var geocoder = new google.maps.Geocoder();
+
+    geocoder.geocode({ 'address': address }, function (results, status) {
+
+        if (status == google.maps.GeocoderStatus.OK) {
+            var latitude = results[0].geometry.location.lat();
+            var longitude = results[0].geometry.location.lng();
+            console.log("latitude" + latitude);
+            console.log("longitude" + longitude);
+
+            // Clear absolutely everything stored in localStorage using localStorage.clear()
+            localStorage.clear();
+
+            // Store the latitude & longtitude into localStorage using "localStorage.setItem"
+            localStorage.setItem("latitude", latitude);
+            localStorage.setItem("longitude", longitude);
+
+        }
+    });
+
+}
+
+
+$(document).on("click", "#map-btn", function () {
+
+    console.log("Clicked on Map Button");
+
+    var destination = $(this).val();
+    console.log("destination =" + destination);
+
+    localStorage.clear();
+    findLatLong(destination);
+    var NWin = window.open('drawtheMap.html', '', 'height=500,width=700');
+    NWin.focus();
+
+
+});
+
 
 //line is here for merge
