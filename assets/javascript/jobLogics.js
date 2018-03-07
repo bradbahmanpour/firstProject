@@ -273,8 +273,8 @@ function findLatLong(address) {
 
             // Save data to sessionStorage
 
-         //   sessionStorage.setItem("latitude", latitude);
-          //  sessionStorage.setItem("longitude", longitude);
+            sessionStorage.setItem("latitude", latitude);
+            sessionStorage.setItem("longitude", longitude);
 
         }
     });
