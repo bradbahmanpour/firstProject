@@ -16,6 +16,11 @@
     font-size: 40px;
 }
 
+#cmp-row {
+    background-color: rgb(109, 158, 142);
+    font-weight: bold;
+}
+
 h1 {
     padding: 60px;
 }

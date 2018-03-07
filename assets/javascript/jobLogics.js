@@ -15,6 +15,7 @@ var checkmark = true;
 
 
 
+
 // URL Base
 var queryURLBase = "https://jobs.github.com/positions.json?";
 
@@ -207,6 +208,8 @@ $("#clear-btn").on("click", function (event) {
     $("#jobLocation").val('');
     $("#well-section").empty();
     localStorage.clear();
+    $("#company-list").empty();
+    jobsPicked = [];
 
 });
 
@@ -291,5 +294,24 @@ $(document).on("click", "#map-btn", function () {
     var NWin = window.open('drawtheMap.html', '', 'height=500,width=700');
     NWin.focus();
 
+
+});
+
+$(document).on("click", "#print-btn", function () {
+
+    window.location.href = "#cmpList";
+    // clear the list before show the new list
+    $("#company-list").empty();
+
+    for (var i = 0; i < jobsPicked.length; i++) {
+
+        console.log(jobsPicked[i].company);
+        console.log(jobsPicked[i].title);
+        console.log(jobsPicked[i].location);
+
+            $("#company-list").append("<tr><td>" + jobsPicked[i].title + "</td><td>"+ jobsPicked[i].company + "</td><td>" + jobsPicked[i].location + "</td></tr>" );
+       
+
+    }
 
 });
