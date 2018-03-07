@@ -265,16 +265,16 @@ function findLatLong(address) {
             console.log("longitude" + longitude);
 
             // Clear absolutely everything stored in localStorage using localStorage.clear()
-            localStorage.clear();
+            window.localStorage.clear();
 
             // Store the latitude & longtitude into localStorage using "localStorage.setItem"
-            localStorage.setItem("latitude", latitude);
-            localStorage.setItem("longitude", longitude);
+            window.localStorage.setItem("latitude", latitude);
+            window.localStorage.setItem("longitude", longitude);
 
             // Save data to sessionStorage
 
-            sessionStorage.setItem("latitude", latitude);
-            sessionStorage.setItem("longitude", longitude);
+         //   sessionStorage.setItem("latitude", latitude);
+          //  sessionStorage.setItem("longitude", longitude);
 
         }
     });
